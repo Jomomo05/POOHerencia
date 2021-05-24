@@ -65,14 +65,14 @@ public:
 
 };
 
-class envio {
+class Envio {
 private:
     Direccion Remitente;
     Direccion Destinatario; 
 public:
 
     //Constructor
-    envio(Direccion remitente, Direccion destinatario) {
+    Envio(Direccion remitente, Direccion destinatario) {
         Remitente = remitente;
         Destinatario = destinatario;
     }
@@ -85,12 +85,12 @@ public:
 };
 
 
-class paquete {
+class paquete:Envio {
 private:
     float Largo, Ancho, Profundidad, Peso, Costo_por_kg;
 public:
     //Constructor
-    paquete(float largo,float ancho, float profundidad, float peso, float costo_por_kg) {
+    paquete(Direccion remitente, Direccion destinatario, float largo,float ancho, float profundidad, float peso, float costo_por_kg): Envio(remitente,destinatario) {
         Largo = largo;
         Ancho = ancho;
         Profundidad = profundidad;
@@ -98,12 +98,32 @@ public:
         Costo_por_kg = costo_por_kg;
     }
 
-    //Funciones
-    double calcularcosto() {
+    double//Funciones
+     calcularcosto() {
 
     }
 
 };
+
+class Sobre :Envio {
+private:
+    
+public:
+
+    //Constructor
+    Sobre(Direccion remitente, Direccion destinatario) :Envio(remitente, destinatario) {
+
+    }
+    // Funciones
+    double calcularcosto() {
+
+    }
+};
+
+
+
+
+
 
 int main()
 {
