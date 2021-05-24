@@ -10,6 +10,7 @@ private:
     int Numero, Cp;
 public:
     //Constructor
+    
     Direccion(string nombre, string calle, int numero, int cp, string ciudad, string estado) {
         Nombre = nombre;
         Calle = calle;
@@ -18,7 +19,7 @@ public:
         Ciudad = ciudad;
         Estado = estado;
     }
-
+    Direccion();
     //Gets
     string get_Nombre() {
         return Nombre;
@@ -79,14 +80,16 @@ public:
 
 
     //Clases
-    double calcularcosto() {
-
+    double calcularcosto() { //Incializador
+        double costo = 70;
+        return costo;
     }
 };
 
 
 class paquete:Envio {
 private:
+    Direccion Remitente, Destinatario;
     float Largo, Ancho, Profundidad, Peso, Costo_por_kg;
 public:
     //Constructor
@@ -96,10 +99,61 @@ public:
         Profundidad = profundidad;
         Peso = peso;
         Costo_por_kg = costo_por_kg;
+        Remitente = remitente;
+        Destinatario = destinatario;
+        
+    }
+    //Sets
+    void set_Largo(float largo) {
+        Largo = largo;
+    }
+    void set_Ancho(float ancho ) {
+         Ancho = ancho;
+    }
+    void set_Profundidad(float profundidad) {
+        Profundidad = profundidad;
+    }
+    void set_Peso(float peso) {
+        Peso = peso;
+    }
+    void set_Costo(float costo) {
+        Costo_por_kg = costo;
+    }
+    
+    //Gets
+    void get_Largo(float largo) {
+        cout << Largo << endl;
+    }
+    void get_Ancho(float ancho) {
+        cout << Ancho << endl;
+    }
+    void get_Profundidad(float profundidad) {
+        cout << Profundidad << endl;
+    }
+    void get_Peso(float peso) {
+        cout << Peso << endl;
+    }
+    void get_Costo(float costo) {
+        cout << Costo_por_kg << endl;
     }
 
-    double//Funciones
-     calcularcosto() {
+
+
+    //Funciones
+    double calcularcosto() {
+        if (Peso < 0)
+        {
+            cout << "Error. El peso tiene valor negativo" << endl;
+            //exit;
+        }
+        if (Costo_por_kg < 0) 
+        {
+            cout << "Error. El Costo por Kg tiene valor negativo" << endl;
+            //exit;
+        }
+
+        double costo = 70 + Peso * Costo_por_kg;
+        return costo;
 
     }
 
@@ -107,16 +161,44 @@ public:
 
 class Sobre :Envio {
 private:
-    
+    Direccion Remitente, Destinatario;
+    float Largo, Ancho,Cargoadicional;
 public:
 
     //Constructor
-    Sobre(Direccion remitente, Direccion destinatario) :Envio(remitente, destinatario) {
+    Sobre(Direccion remitente, Direccion destinatario, float largo, float ancho) :Envio(remitente, destinatario) {
+        Largo = largo;
+        Ancho = ancho;
+        Cargoadicional = 30;
+        Remitente = remitente;
+        Destinatario = destinatario;
 
     }
+    //Sets
+    void set_Largo(float largo) {
+        Largo = largo;
+    }
+    void set_Ancho(float ancho) {
+        Ancho = ancho;
+    }
+    void set_Cargo(float cargo) {
+        Cargoadicional = cargo;
+    }
+    //Gets
+    void get_Largo(float largo) {
+        cout << Largo << endl;
+    }
+    void get_Ancho(float ancho) {
+        cout << Ancho << endl;
+    }
+    void get_Cargo(float cargo) {
+        cout << Cargoadicional << endl;
+    }
     // Funciones
-    double calcularcosto() {
-
+    double calcularcosto() { //Transformación: L
+        if (Largo * Ancho > 750)
+            cout << "Se aplicará un cargo adicional de " << Cargoadicional << endl;
+        return 70 + Cargoadicional;
     }
 };
 
@@ -127,7 +209,22 @@ public:
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Direccion Direccion1 = Direccion("Jose", "California", 1138, 85210, "Obregon", "Sonora");
+    Direccion Direccion2 = Direccion("Sofia", "Cananea", 1234, 85555, "San luis", "Chiapas");
+
+    Envio Env1 = Envio(Direccion1, Direccion2);
+    cout << Env1.calcularcosto() << endl; //Deberia print 70
+
+    paquete Pak1 = paquete(Direccion1, Direccion2, 10, 5, 4, 20, 5);
+    cout << Pak1.calcularcosto() << endl; //Deberia print 170
+
+    Sobre sob1 = Sobre(Direccion1, Direccion2, 50, 20);
+    cout << sob1.calcularcosto() << endl; //Deberia print 100
+
+    
+
+
+
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
