@@ -68,7 +68,7 @@ public:
 class envio {
 private:
     Direccion Remitente;
-    Direccion Destinatario;
+    Direccion Destinatario; 
 public:
 
     //Constructor
