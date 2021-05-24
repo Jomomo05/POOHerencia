@@ -1,4 +1,5 @@
 // POOHerencia.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+// Hecho por: José Miguel Beltrán Cinco A00227714
 //
 
 #include <iostream>
