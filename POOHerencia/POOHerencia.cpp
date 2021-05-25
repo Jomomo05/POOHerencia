@@ -20,7 +20,9 @@ public:
         Ciudad = ciudad;
         Estado = estado;
     }
-    Direccion();
+    Direccion() {
+        
+    }
     //Gets
     string get_Nombre() {
         return Nombre;
@@ -198,7 +200,7 @@ public:
     // Funciones
     double calcularcosto() { //Transformación: L
         if (Largo * Ancho > 750)
-            cout << "Se aplicará un cargo adicional de " << Cargoadicional << endl;
+            cout << "Se aplicara un cargo adicional de " << Cargoadicional << endl;
         return 70 + Cargoadicional;
     }
 };
